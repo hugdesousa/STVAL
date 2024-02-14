@@ -93,16 +93,16 @@
     imageDisplay.src = imagePaths[noClickCount];
     if (noClickCount === 0) {
       // Augmente la taille de la première image
-      imageDisplay.style.width = '400px';
-      imageDisplay.style.height = 'auto';
+      //imageDisplay.style.width = '400px';
+      //imageDisplay.style.height = 'auto';
     }
     noClickCount++;
-    buttonHeight += 35;
-    buttonWidth += 35;
-    fontSize += 25;
-    yesButton.style.height = `${buttonHeight}px`;
-    yesButton.style.width = `${buttonWidth}px`;
-    yesButton.style.fontSize = `${fontSize}px`;
+    //buttonHeight += 35;
+    //buttonWidth += 35;
+    //fontSize += 25;
+    //yesButton.style.height = `${buttonHeight}px`;
+    //yesButton.style.width = `${buttonWidth}px`;
+    //yesButton.style.fontSize = `${fontSize}px`;
     noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
   } else {
     // Réinitialise tout à l'état initial
@@ -119,13 +119,6 @@
     imageDisplay.style.height = 'auto';
   }
 
-  console.log('Button clicked');
-  if (navigator.vibrate) {
-    console.log('Vibrating');
-    navigator.vibrate(200);
-  } else {
-    console.log('Vibration API not supported');
-  }
 });
 
   
