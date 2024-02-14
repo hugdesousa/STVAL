@@ -91,8 +91,6 @@
     noButton.addEventListener('click', function() {
       if (noClickCount < 5) { // Changez 5 à 6 pour permettre 6 clics
         imageDisplay.src = imagePaths[noClickCount];
-        window.navigator.vibrate(200);
-        navigator.vibrate(200); // Vibrez pendant 200 millisecondes
       }
       console.log('Button clicked');
       if (navigator.vibrate) {
