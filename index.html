@@ -118,9 +118,9 @@
     function moveButton() {
       const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
       const maxX = parent.clientWidth - noButton.offsetWidth;
-      const maxY = parent.clientHeight - noButton.offsetHeight - 150; // Adjust for browser navigation bar
+      const maxY = parent.clientHeight - noButton.offsetHeight; // Adjust for browser navigation bar
       const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
+      const randomY = Math.floor(Math.random() * maxY)+150;
       noButton.style.position = 'absolute';
       noButton.style.left = `${randomX}px`;
       noButton.style.top = `${randomY}px`;
