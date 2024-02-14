@@ -28,17 +28,21 @@
       }
     }
   
-    #yesButton, #noButton {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombrage doux */
-      padding: 10px 20px; /* Ajustez la taille du padding pour agrandir les boutons */
-      font-size: 4vw; /* Taille de police relative à la largeur de l'écran */
-    }
+  #yesButton, #noButton {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombrage doux */
+    padding: 10px 20px; /* Ajustez la taille du padding pour agrandir les boutons */
+    font-size: 4vw; /* Taille de police relative à la largeur de l'écran */
+    font-weight: bold; /* Police en gras */
+    text-transform: uppercase; /* Texte en majuscules */
+  }
   
     #valentineQuestion {
       color: white;
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75); /* Ombrage doux pour le texte */
       font-size: 5vw; /* Taille de police relative à la largeur de l'écran */
+      font-weight: bold; /* Police en gras */
+      font-style: italic; /* Style de police en italique */
     }
   
     #imageDisplay {
@@ -85,12 +89,15 @@
     ];
   
     noButton.addEventListener('click', function() {
-  if (noClickCount < 5) { // Changez 5 à 6 pour permettre 6 clics
-    imageDisplay.src = imagePaths[noClickCount];
-    if (noClickCount === 0) {
-      // Augmente la taille de la première image
-      imageDisplay.style.width = '400px'; // Ajustez selon la taille souhaitée
-      imageDisplay.style.height = 'auto'; // Conserve le ratio de l'image
+      if (noClickCount < 5) { // Changez 5 à 6 pour permettre 6 clics
+        imageDisplay.src = imagePaths[noClickCount];
+        if (navigator.vibrate) {
+          navigator.vibrate(200); // Vibrez pendant 200 millisecondes
+        }
+        if (noClickCount === 0) {
+          // Augmente la taille de la première image
+          imageDisplay.style.width = '400px'; // Ajustez selon la taille souhaitée
+          imageDisplay.style.height = 'auto'; // Conserve le ratio de l'image
     }
     noClickCount++;
     buttonHeight += 35; // Increase height by 35px on each click
