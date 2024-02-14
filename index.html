@@ -140,11 +140,9 @@
       //video.play();
       noButton.textContent = "NON"; // Change the text for the final state
       noButton.style.position = 'static';
-      noButton.onclick = function() {
-        window.location.href = 'tel:5147748144'; // Call the number
-        // Set a timeout to reset the page after 10 seconds if the user stays on the page
-        timeoutId = setTimeout(resetPage, 10000);
-      };
+      setTimeout(function() {
+          location.reload();
+        }, 10000);
     }
   });
 
