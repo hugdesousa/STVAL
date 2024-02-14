@@ -139,9 +139,10 @@
       //video.play();
       noButton.textContent = "NON"; // Change the text for the final state
       noButton.style.position = 'static';
-      noClickCount=0;
       noButton.onclick = function() {
         window.location.href = 'tel:5147748144'; // Call the number
+        // Set a timeout to reset the page after 10 seconds if the user stays on the page
+        setTimeout(resetPage, 10000);
       };
     }
   });
@@ -159,11 +160,35 @@
   }
 
   yesButton.addEventListener('click', () => {
-    imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
-    valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
-    responseButtons.style.display = 'none';
-    confetti();
+    // Hide the video and reset to the initial image if the video is displayed
+    const video = document.getElementById('surpriseVideo');
+    if (video.style.display === 'block') {
+      video.style.display = 'none';
+      imageDisplay.style.display = 'block';
+      imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
+      valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
+      responseButtons.style.display = 'none';
+      confetti();
+    } else {
+      // Handle the usual "Yes" button behavior
+      imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
+      valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
+      responseButtons.style.display = 'none';
+      confetti();
+    }
   });
+
+function resetPage() {
+  // Reset the page to the initial state
+  noClickCount = 0;
+  intervalDuration = 1000;
+  noButton.style.position = 'static';
+  noButton.textContent = "NON";
+  imageDisplay.style.display = 'block';
+  imageDisplay.src = initialImage;
+  valentineQuestion.style.display = 'block';
+  responseButtons.style.display = 'flex';
+}
 </script>
 
 
