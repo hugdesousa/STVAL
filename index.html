@@ -90,13 +90,12 @@
   let intervalId;
   let intervalDuration = 1000; // Initial interval duration in milliseconds
   const initialImage = imageDisplay.src; // Store the initial image URL
-  const navigationBarHeight = 60; // Estimated height of the browser's navigation bar
 
   const imagePaths = [
     "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif", // Image displayed on "Oh t'as misclick, right?"
-    "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif", // Image displayed on "Impossible, misclick 2 fois?!"
-    "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s", // Image displayed on "3 FOIS??? C'est rendu personnel là"
-    "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif", // Image displayed on "OK TU PEUX ARRÊTER LÀ"
+    "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif", // Image displayed on "Impossible, 2 fois?!"
+    "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s", // Image displayed on "Essayes-tu de battres un record?!"
+    "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif", // Image displayed on "ON VA AVOIR DU"
   ];
 
   noButton.addEventListener('click', function() {
@@ -115,16 +114,15 @@
         intervalId = setInterval(moveButton, intervalDuration);
       }
     } else {
-      // Reset everything to the initial state
-      clearInterval(intervalId);
-      noClickCount = 0;
-      intervalDuration = 1000;
+      // Display the video
+      imageDisplay.style.display = 'none';
       const video = document.getElementById('surpriseVideo');
-        video.style.display = 'block';
-        video.play();
-      noButton.style.position = 'static';
-      imageDisplay.src = initialImage; // Reset to the initial image
-      noButton.textContent = "NON"; // Reset the button text
+      video.style.display = 'block';
+      video.play();
+      noButton.textContent = "Appeler au 5147748144"; // Change the text for the final state
+      noButton.onclick = function() {
+        window.location.href = 'tel:5147748144'; // Call the number
+      };
     }
   });
 
@@ -133,7 +131,7 @@
     const maxX = parent.clientWidth - noButton.offsetWidth;
     const maxY = parent.clientHeight - noButton.offsetHeight - 200; // Adjust for browser navigation bar
     const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY)+50;
+    const randomY = Math.floor(Math.random() * maxY) + 50;
     noButton.style.position = 'absolute';
     noButton.style.left = `${randomX}px`;
     noButton.style.top = `${randomY}px`;
@@ -146,6 +144,7 @@
     confetti();
   });
 </script>
+
 
 
 </body>
