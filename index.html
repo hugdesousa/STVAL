@@ -94,7 +94,7 @@
     if (noClickCount < 5) {
       imageDisplay.src = imagePaths[noClickCount];
       noClickCount++;
-      noButton.textContent = ["NON","Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
+      noButton.textContent = ["NON","Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount];
 
       if (noClickCount >= 2) {
         // Increase the speed of the button movement
@@ -120,7 +120,7 @@
     const maxX = parent.clientWidth - noButton.offsetWidth;
     const maxY = parent.clientHeight - noButton.offsetHeight - 300; // Adjust for browser navigation bar
     const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
+    const randomY = Math.floor(Math.random() * maxY)+50;
     noButton.style.position = 'absolute';
     noButton.style.left = `${randomX}px`;
     noButton.style.top = `${randomY}px`;
