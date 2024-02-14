@@ -90,6 +90,10 @@
       "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s",
       "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif",
     ];
+    
+    noButton.style.position = 'absolute';
+    noButton.style.left = '0px';
+    noButton.style.top = '0px';
   
     noButton.addEventListener('click', function() {
   if (noClickCount < 5) {
@@ -122,7 +126,7 @@
     imageDisplay.style.height = 'auto';
   }
       // Augmente la vitesse de déplacement du bouton "Non"
-      intervalDuration = Math.max(100, intervalDuration - 100); // Réduit la durée de l'intervalle, mais ne descend pas en dessous de 100 ms
+      intervalDuration = Math.max(100, intervalDuration - 100);
 
       // Arrête l'intervalle précédent si nécessaire
       if (intervalId) {
@@ -139,8 +143,7 @@
         noButton.style.left = `${randomX}px`;
         noButton.style.top = `${randomY}px`;
       }, intervalDuration);
-
-});
+    });
 
   
     yesButton.addEventListener('click', () => {
