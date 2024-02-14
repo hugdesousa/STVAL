@@ -28,35 +28,36 @@
       }
     }
   
-    /* Ajout de l'ombrage pour les boutons */
     #yesButton, #noButton {
-      
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombrage doux */
+      padding: 10px 20px; /* Ajustez la taille du padding pour agrandir les boutons */
+      font-size: 4vw; /* Taille de police relative à la largeur de l'écran */
     }
   
-    /* Ajout de l'ombrage pour le texte */
     #valentineQuestion {
-
       color: white;
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75); /* Ombrage doux pour le texte */
+      font-size: 5vw; /* Taille de police relative à la largeur de l'écran */
+    }
+  
+    #imageDisplay {
+      width: 80vw; /* Largeur de l'image relative à la largeur de l'écran */
+      height: auto; /* Conserve le ratio de l'image */
     }
   </style>
-  
 </head>
 <body class="gradient-background">
   <div class="flex items-center justify-center h-screen">
     <div class="flex flex-col items-center p-4">
-      <img id="imageDisplay" src="https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt="Cute kitten with flowers" class="rounded-md h-[300px]" style="object-fit: cover;" />
+      <img id="imageDisplay" src="https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt="Cute kitten with flowers" class="rounded-md" />
 
-      <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">Voudrais-tu être ma Valentine?</h2>
+      <h2 id="valentineQuestion" class="my-4">Voudrais-tu être ma Valentine?</h2>
       <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
-        <button id="yesButton"
-          class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium disabled:pointer-events-none disabled:opacity-50 hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
+        <button id="yesButton" class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-white transition bg-green-500 hover:bg-green-400">
           OUI
         </button>
-        <button id="noButton"
-          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition disabled:pointer-events-none disabled:opacity-50 hover:bg-red-700 h-12 min-w-[75px] w-auto px-4 py-2 bg-red-500 text-white">
+        <button id="noButton" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-white transition bg-red-500 hover:bg-red-700">
           NON
         </button>
       </div>
