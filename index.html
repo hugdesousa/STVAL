@@ -193,6 +193,17 @@
     confetti();
   }
 });
+bonusButton.addEventListener('click', () => {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+  video.style.display = 'block';
+  imageDisplay.style.display = 'none';
+  valentineQuestion.style.display = 'none';
+  responseButtons.style.display = 'none';
+  bonusButton.style.display = 'none'; // Cachez le bouton "Bonus" après le clic
+  video.play();
+});
 
   video.addEventListener('play', function() {
   if (timeoutId) {
