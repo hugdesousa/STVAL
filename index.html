@@ -91,9 +91,9 @@
     noButton.addEventListener('click', function() {
       if (noClickCount < 5) { // Changez 5 à 6 pour permettre 6 clics
         imageDisplay.src = imagePaths[noClickCount];
-        if (navigator.vibrate) {
-          navigator.vibrate(200); // Vibrez pendant 200 millisecondes
-        }
+        window.navigator.vibrate(200);
+        navigator.vibrate(200); // Vibrez pendant 200 millisecondes
+      }
         if (noClickCount === 0) {
           // Augmente la taille de la première image
           imageDisplay.style.width = '400px'; // Ajustez selon la taille souhaitée
