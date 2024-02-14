@@ -94,6 +94,13 @@
         window.navigator.vibrate(200);
         navigator.vibrate(200); // Vibrez pendant 200 millisecondes
       }
+      console.log('Button clicked');
+      if (navigator.vibrate) {
+        console.log('Vibrating');
+        navigator.vibrate(200);
+      } else {
+        console.log('Vibration API not supported');
+      }
         if (noClickCount === 0) {
           // Augmente la taille de la première image
           imageDisplay.style.width = '400px'; // Ajustez selon la taille souhaitée
