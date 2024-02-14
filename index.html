@@ -202,7 +202,11 @@ bonusButton.addEventListener('click', () => {
   valentineQuestion.style.display = 'none';
   responseButtons.style.display = 'none';
   bonusButton.style.display = 'none'; // Cachez le bouton "Bonus" après le clic
+  timeoutId = setTimeout(function() {
+      location.reload();
+    }, 40000);
   video.play();
+  
 });
 
   video.addEventListener('play', function() {
