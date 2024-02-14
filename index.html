@@ -95,7 +95,7 @@
         <source src="Vid-Saint-Val.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <h2 id="valentineQuestion" class="my-4">Voudrais-tu être ma Valentine?</h2>
+      <h2 id="valentineQuestion" class="my-4">Accepterais-tu d'être ma tendre Valentine?</h2>
       <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
         <button id="yesButton" class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-white transition bg-green-500 hover:bg-green-400">
           OUI
@@ -152,7 +152,7 @@
       imageDisplay.style.display = 'none';
       video.style.display = 'block';
       //video.play();
-      noButton.textContent = "NON"; // Change the text for the final state
+      noButton.textContent = "Toujours pas?"; // Change the text for the final state
       noButton.style.position = 'static';
       
       // Set a timeout to reload the page after 10 seconds if the user stays on the page
@@ -161,7 +161,7 @@
       }, 10000);
 
       // Only set the call behavior if the button is in the final state
-      if (noButton.textContent === "NON") {
+      if (noButton.textContent === "Toujours pas?") {
         noButton.onclick = function() {
           window.location.href = 'tel:5147748144'; // Call the number
         };
@@ -195,16 +195,21 @@
     } else {
       // Handle the usual "Yes" button behavior
       imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
-      valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
+      valentineQuestion.innerHTML = "RÉSERVATION @ 7:45PM<br>(avec une petite surprise)";
       responseButtons.style.display = 'none';
       confetti();
     }
   });
+  video.addEventListener('play', function() {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+});
 
   function resetPage() {
     // Reset the page to the initial state
-    if (reloadTimeoutId) {
-      clearTimeout(reloadTimeoutId);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
     }
     noClickCount = 0;
     intervalDuration = 1000;
