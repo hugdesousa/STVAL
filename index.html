@@ -7,12 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
   
-    .gradiant-background {
+    .gradient-background {
   position: relative;
   overflow: hidden; /* Ensure the pseudo-element doesn't overflow the container */
 }
 
-.gradiant-background::before {
+.gradient-background::before {
   content: '';
   position: absolute;
   top: 0;
@@ -23,6 +23,8 @@
   background-size: cover;
   background-position: center;
   transform: scaleY(-1); /* Flips the background image vertically */
+  z-index: -1; /* Ensure the pseudo-element is behind the content */
+
 }
 
     .bounce2 {
@@ -208,6 +210,7 @@
     intervalDuration = 1000;
     noButton.style.position = 'static';
     noButton.textContent = "NON";
+    noButton.onclick = null; // Remove the call behavior
     video.style.display = 'none';
     imageDisplay.style.display = 'block';
     imageDisplay.src = initialImage;
