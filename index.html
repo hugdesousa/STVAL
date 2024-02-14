@@ -31,7 +31,7 @@
     #yesButton, #noButton {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       padding: 10px 20px;
-      font-size: 4vw;
+      font-size: 2rem; /* Taille de police pour les ordinateurs */
       font-weight: bold;
       text-transform: uppercase;
     }
@@ -40,13 +40,13 @@
       color: white;
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
-      font-size: 5vw;
+      font-size: 3rem; /* Taille de police pour les ordinateurs */
       font-weight: bold;
       font-style: italic;
     }
 
     #imageDisplay {
-      width: 80vw;
+      width: 50vw; /* Largeur de l'image pour les ordinateurs */
       height: auto;
     }
 
@@ -54,6 +54,21 @@
       display: flex;
       justify-content: center; /* Centrer les boutons horizontalement */
       gap: 4rem; /* Espacement entre les boutons */
+    }
+
+    @media (max-width: 768px) {
+      /* Styles pour les téléphones */
+      #yesButton, #noButton {
+        font-size: 4vw;
+      }
+
+      #valentineQuestion {
+        font-size: 5vw;
+      }
+
+      #imageDisplay {
+        width: 80vw;
+      }
     }
   </style>
 </head>
