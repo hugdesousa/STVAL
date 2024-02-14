@@ -61,7 +61,10 @@
   <div class="flex items-center justify-center h-screen" style="position: relative;">
     <div class="flex flex-col items-center p-4">
       <img id="imageDisplay" src="https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt="Image-initial" class="rounded-md" />
-
+      <video id="surpriseVideo" style="display: none;" width="80%" controls>
+        <source src="Vid-Saint-Val.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
       <h2 id="valentineQuestion" class="my-4">Voudrais-tu être ma Valentine?</h2>
       <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
         <button id="yesButton" class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-white transition bg-green-500 hover:bg-green-400">
@@ -71,11 +74,7 @@
           NON
         </button>
       </div>
-      <video id="surpriseVideo" style="display: none;" width="80%" controls>
-        <source src="Vid-Saint-Val.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <button id="fullscreenButton" style="display: none;">[ ]</button>
+      
     </div>
   </div>
 
@@ -100,36 +99,32 @@
   ];
 
   noButton.addEventListener('click', function() {
-      if (noClickCount < 5) {
-        // Display images
-        imageDisplay.style.display = 'block';
-        imageDisplay.src = imagePaths[noClickCount];
-        noButton.textContent = ["NON", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount];
-        noClickCount++;
-      } else {
-        // Display video
-        imageDisplay.style.display = 'none';
-        const video = document.getElementById('surpriseVideo');
-        video.style.display = 'block';
-        noButton.textContent = "Appeler au 5147748144";
-        const fullscreenButton = document.getElementById('fullscreenButton');
-        fullscreenButton.style.display = 'block';
-        fullscreenButton.onclick = function() {
-          if (video.requestFullscreen) {
-            video.requestFullscreen();
-          } else if (video.mozRequestFullScreen) { /* Firefox */
-            video.mozRequestFullScreen();
-          } else if (video.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-            video.webkitRequestFullscreen();
-          } else if (video.msRequestFullscreen) { /* IE/Edge */
-            video.msRequestFullscreen();
-          }
-        };
-        noButton.onclick = function() {
-          window.location.href = 'tel:5147748144'; // Call the number
-        };
+    noButton.textContent = ["Oh t'as misclick, right?", "Impossible, 2 fois?!", "Essayes-tu de battres un record?!", "ON VA AVOIR DU"][noClickCount];
+
+    if (noClickCount < 4) {
+      imageDisplay.src = imagePaths[noClickCount];
+      noClickCount++;
+
+      if (noClickCount >= 1) {
+        // Increase the speed of the button movement
+        intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration
+
+        // Restart the movement with the new speed
+        clearInterval(intervalId);
+        intervalId = setInterval(moveButton, intervalDuration);
       }
-    });
+    } else {
+      // Display the video
+      imageDisplay.style.display = 'none';
+      const video = document.getElementById('surpriseVideo');
+      video.style.display = 'block';
+      video.play();
+      noButton.textContent = "NON"; // Change the text for the final state
+      noButton.onclick = function() {
+        window.location.href = 'tel:5147748144'; // Call the number
+      };
+    }
+  });
 
   function moveButton() {
     const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
@@ -149,6 +144,7 @@
     confetti();
   });
 </script>
+
 
 
 
