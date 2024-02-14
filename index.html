@@ -79,6 +79,7 @@
     let noClickCount = 0;
     let intervalId;
     let intervalDuration = 1000; // Initial interval duration in milliseconds
+    const initialImage = imageDisplay.src; // Store the initial image URL
 
     const imagePaths = [
       "https://media.giphy.com/media/7lGTNWDKs6dDvJF6fZ/giphy.gif?cid=ecf05e47ubf0xeoj49pv1a2of0scilbsruvlxojk71m7robi&ep=v1_stickers_search&rid=giphy.gif&ct=s",
@@ -94,7 +95,7 @@
         noClickCount++;
         noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
 
-        if (noClickCount >= 2) {
+        if (noClickCount >= 1) {
           // Increase the speed of the button movement
           intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration, but don't go below 100 ms
 
@@ -109,14 +110,14 @@
         intervalDuration = 1000;
         noButton.style.position = 'static';
         noButton.textContent = "Non";
-        imageDisplay.src = imagePaths[0];
+        imageDisplay.src = initialImage; // Reset to the initial image
       }
     });
 
     function moveButton() {
       const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
       const maxX = parent.clientWidth - noButton.offsetWidth;
-      const maxY = parent.clientHeight - noButton.offsetHeight;
+      const maxY = parent.clientHeight - noButton.offsetHeight - 50; // Adjust for browser navigation bar
       const randomX = Math.floor(Math.random() * maxX);
       const randomY = Math.floor(Math.random() * maxY);
       noButton.style.position = 'absolute';
@@ -130,7 +131,6 @@
       responseButtons.style.display = 'none';
       confetti();
     });
-  </script>  
+  </script>
 </body>
 </html>
-
