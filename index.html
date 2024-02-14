@@ -83,20 +83,20 @@
   const navigationBarHeight = 60; // Estimated height of the browser's navigation bar
 
   const imagePaths = [
-    "https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s",
-    "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif",
-    "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif",
-    "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s",
-    "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif",
+    "https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s", // Initial image
+    "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif", // Image displayed on "misclick, right?"
+    "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif", // Image displayed on "Impossible, misclick 2 fois?!"
+    "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s", // Image displayed on "3 FOIS??? C'est rendu personnel là"
+    "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif", // Image displayed on "OK TU PEUX ARRÊTER LÀ"
   ];
 
   noButton.addEventListener('click', function() {
-    if (noClickCount < 5) {
+    if (noClickCount < 4) {
       imageDisplay.src = imagePaths[noClickCount];
       noClickCount++;
-      noButton.textContent = ["NON","Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount];
+      noButton.textContent = ["NON", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount];
 
-      if (noClickCount >= 2) {
+      if (noClickCount >= 1) {
         // Increase the speed of the button movement
         intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration
 
@@ -110,8 +110,8 @@
       noClickCount = 0;
       intervalDuration = 1000;
       noButton.style.position = 'static';
-      noButton.textContent = "NON";
       imageDisplay.src = initialImage; // Reset to the initial image
+      noButton.textContent = "NON"; // Reset the button text
     }
   });
 
@@ -120,7 +120,7 @@
     const maxX = parent.clientWidth - noButton.offsetWidth;
     const maxY = parent.clientHeight - noButton.offsetHeight - 300; // Adjust for browser navigation bar
     const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY)+50;
+    const randomY = Math.floor(Math.random() * maxY) + 50;
     noButton.style.position = 'absolute';
     noButton.style.left = `${randomX}px`;
     noButton.style.top = `${randomY}px`;
