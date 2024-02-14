@@ -91,12 +91,18 @@
       "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif",
     ];
     
-    noButton.style.position = 'absolute';
-    noButton.style.left = '0px';
-    noButton.style.top = '0px';
+  
   
     noButton.addEventListener('click', function() {
-  if (noClickCount < 5) {
+      if (noClickCount >= 1) {
+        // Increase the speed of the button movement
+        intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration, but don't go below 100 ms
+
+        // Restart the movement with the new speed
+        clearInterval(intervalId);
+        intervalId = setInterval(moveButton, intervalDuration);
+      }
+      if (noClickCount < 5) {
     imageDisplay.src = imagePaths[noClickCount];
     if (noClickCount === 0) {
       // Augmente la taille de la première image
@@ -125,25 +131,25 @@
     imageDisplay.style.width = '300px';
     imageDisplay.style.height = 'auto';
   }
-      // Augmente la vitesse de déplacement du bouton "Non"
-      intervalDuration = Math.max(100, intervalDuration - 100);
-
-      // Arrête l'intervalle précédent si nécessaire
-      if (intervalId) {
+      if (noClickCount === 5) {
         clearInterval(intervalId);
+        noClickCount = 0;
+        intervalDuration = 1000;
+        noButton.style.position = 'static';
       }
 
-      // Démarre un nouvel intervalle pour déplacer le bouton "Non"
-      intervalId = setInterval(function() {
-        const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
-        const maxX = parent.clientWidth - noButton.offsetWidth;
-        const maxY = parent.clientHeight - noButton.offsetHeight;
-        const randomX = Math.floor(Math.random() * maxX);
-        const randomY = Math.floor(Math.random() * maxY);
-        noButton.style.left = `${randomX}px`;
-        noButton.style.top = `${randomY}px`;
-      }, intervalDuration);
+  
     });
+    function moveButton() {
+      const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
+      const maxX = parent.clientWidth - noButton.offsetWidth;
+      const maxY = parent.clientHeight - noButton.offsetHeight;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+    }
 
   
     yesButton.addEventListener('click', () => {
