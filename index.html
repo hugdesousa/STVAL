@@ -104,6 +104,7 @@
   let noClickCount = 0;
   let intervalId;
   let intervalDuration = 1000; // Initial interval duration in milliseconds
+  let timeoutId;
   const initialImage = imageDisplay.src; // Store the initial image URL
 
   const imagePaths = [
@@ -160,8 +161,12 @@
   }
 
   yesButton.addEventListener('click', () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
     // Hide the video and reset to the initial image if the video is displayed
     const video = document.getElementById('surpriseVideo');
+    
     if (video.style.display === 'block') {
       video.style.display = 'none';
       imageDisplay.style.display = 'block';
@@ -184,6 +189,7 @@ function resetPage() {
   intervalDuration = 1000;
   noButton.style.position = 'static';
   noButton.textContent = "NON";
+  video.style.display = 'none'
   imageDisplay.style.display = 'block';
   imageDisplay.src = initialImage;
   valentineQuestion.style.display = 'block';
