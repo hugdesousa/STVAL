@@ -84,7 +84,6 @@
 
   const imagePaths = [
     "https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s",
-    "https://media.giphy.com/media/7lGTNWDKs6dDvJF6fZ/giphy.gif?cid=ecf05e47ubf0xeoj49pv1a2of0scilbsruvlxojk71m7robi&ep=v1_stickers_search&rid=giphy.gif&ct=s",
     "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif",
     "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif",
     "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s",
@@ -95,9 +94,9 @@
     if (noClickCount < 5) {
       imageDisplay.src = imagePaths[noClickCount];
       noClickCount++;
-      noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
+      noButton.textContent = ["NON","Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
 
-      if (noClickCount >= 1) {
+      if (noClickCount >= 2) {
         // Increase the speed of the button movement
         intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration
 
@@ -111,7 +110,7 @@
       noClickCount = 0;
       intervalDuration = 1000;
       noButton.style.position = 'static';
-      noButton.textContent = "Non";
+      noButton.textContent = "NON";
       imageDisplay.src = initialImage; // Reset to the initial image
     }
   });
@@ -119,7 +118,7 @@
   function moveButton() {
     const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
     const maxX = parent.clientWidth - noButton.offsetWidth;
-    const maxY = parent.clientHeight - noButton.offsetHeight - navigationBarHeight; // Adjust for browser navigation bar
+    const maxY = parent.clientHeight - noButton.offsetHeight - 300; // Adjust for browser navigation bar
     const randomX = Math.floor(Math.random() * maxX);
     const randomY = Math.floor(Math.random() * maxY);
     noButton.style.position = 'absolute';
