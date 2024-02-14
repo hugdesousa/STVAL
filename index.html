@@ -37,7 +37,7 @@
     }
 
     #valentineQuestion {
-      color: white;
+      color: magenta;
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
       font-size: 3rem; /* Taille de police pour les ordinateurs */
@@ -141,7 +141,7 @@
       noButton.style.position = 'static';
       
       // Set a timeout to reload the page after 10 seconds if the user stays on the page
-      setTimeout(function() {
+      timeoutId = setTimeout(function() {
         location.reload();
       }, 10000);
 
@@ -188,6 +188,9 @@
 
   function resetPage() {
     // Reset the page to the initial state
+    if (reloadTimeoutId) {
+      clearTimeout(reloadTimeoutId);
+    }
     noClickCount = 0;
     intervalDuration = 1000;
     noButton.style.position = 'static';
