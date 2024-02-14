@@ -90,6 +90,7 @@
 <body class="gradient-background">
   <div class="flex items-center justify-center h-screen" style="position: relative;">
     <div class="flex flex-col items-center p-4">
+      <button id="bonusButton" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-white transition bg-blue-500 hover:bg-blue-400" style="display: none;">Bonus</button>
       <img id="imageDisplay" src="https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt="Image-initial" class="rounded-md" />
       <video id="surpriseVideo" style="display: none;" width="80%" controls>
         <source src="Vid-Saint-Val.mp4" type="video/mp4">
@@ -174,19 +175,24 @@
   }
   if (video.style.display === 'block') {
     video.style.display = 'none';
+    responseButtons.style.display = 'flex';
     imageDisplay.style.display = 'block';
+    valentineQuestion.style.display = 'block';
+    bonusButton.style.display = 'none'; // Cachez le bouton "Bonus"
     imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
     valentineQuestion.innerHTML = "RÉSERVATION @ 7:45PM<br>(avec une petite surprise)";
     responseButtons.style.display = 'none';
     confetti();
     noButton.onclick = null; // Remove the call behavior after pressing Yes
   } else {
+    bonusButton.style.display = 'inline-flex'; // Affichez le bouton "Bonus"
     imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
     valentineQuestion.innerHTML = "RÉSERVATION @ 7:45PM<br>(avec une petite surprise)";
     responseButtons.style.display = 'none';
     confetti();
   }
 });
+
   video.addEventListener('play', function() {
   if (timeoutId) {
     clearTimeout(timeoutId);
