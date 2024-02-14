@@ -131,43 +131,31 @@
   ];
 
   noButton.addEventListener('click', function() {
-    if (noClickCount < 4) {
-      imageDisplay.src = imagePaths[noClickCount];
-      noClickCount++;
-      noButton.textContent = ["Oh t'as misclick, right?", "Impossible, 2 fois?!", "Essayes-tu de battres un record?!", "ON VA AVOIR DU BEEF"][noClickCount - 1];
+  if (noClickCount < 4) {
+    imageDisplay.src = imagePaths[noClickCount];
+    noClickCount++;
+    noButton.textContent = ["Oh t'as misclick, right?", "Impossible, 2 fois?!", "Essayes-tu de battres un record?!", "ON VA AVOIR DU BEEF"][noClickCount - 1];
 
-      if (noClickCount >= 1) {
-        // Increase the speed of the button movement
-        intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration
-
-        // Restart the movement with the new speed
-        clearInterval(intervalId);
-        intervalId = setInterval(moveButton, intervalDuration);
-      }
-    } else {
-      // Stop the button movement
+    if (noClickCount >= 1) {
+      intervalDuration = Math.max(100, intervalDuration - 100);
       clearInterval(intervalId);
-
-      // Display the video
-      imageDisplay.style.display = 'none';
-      video.style.display = 'block';
-      //video.play();
-      noButton.textContent = "Toujours pas?"; // Change the text for the final state
-      noButton.style.position = 'static';
-      
-      // Set a timeout to reload the page after 10 seconds if the user stays on the page
-      timeoutId = setTimeout(function() {
-        location.reload();
-      }, 60000);
-
-      // Only set the call behavior if the button is in the final state
-      if (noButton.textContent === "Toujours pas?") {
-        noButton.onclick = function() {
-          window.location.href = 'tel:5147748144'; // Call the number
-        };
-      }
+      intervalId = setInterval(moveButton, intervalDuration);
     }
-  });
+  } else {
+    clearInterval(intervalId);
+    imageDisplay.style.display = 'none';
+    video.style.display = 'block';
+    noButton.textContent = "Toujours pas?";
+    noButton.style.position = 'static';
+    timeoutId = setTimeout(function() {
+      location.reload();
+    }, 60000);
+    noButton.onclick = function() {
+      window.location.href = 'tel:5147748144';
+      clearTimeout(timeoutId); // Clear the timeout when the call is initiated
+    };
+  }
+});
 
   function moveButton() {
     const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
@@ -181,25 +169,24 @@
   }
 
   yesButton.addEventListener('click', () => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    // Hide the video and reset to the initial image if the video is displayed
-    if (video.style.display === 'block') {
-      video.style.display = 'none';
-      imageDisplay.style.display = 'block';
-      imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
-      valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
-      responseButtons.style.display = 'none';
-      confetti();
-    } else {
-      // Handle the usual "Yes" button behavior
-      imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
-      valentineQuestion.innerHTML = "RÉSERVATION @ 7:45PM<br>(avec une petite surprise)";
-      responseButtons.style.display = 'none';
-      confetti();
-    }
-  });
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+  if (video.style.display === 'block') {
+    video.style.display = 'none';
+    imageDisplay.style.display = 'block';
+    imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
+    valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
+    responseButtons.style.display = 'none';
+    confetti();
+    noButton.onclick = null; // Remove the call behavior after pressing Yes
+  } else {
+    imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
+    valentineQuestion.innerHTML = "RÉSERVATION @ 7:45PM<br>(avec une petite surprise)";
+    responseButtons.style.display = 'none';
+    confetti();
+  }
+});
   video.addEventListener('play', function() {
   if (timeoutId) {
     clearTimeout(timeoutId);
