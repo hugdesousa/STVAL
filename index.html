@@ -89,31 +89,22 @@
     ];
   
     noButton.addEventListener('click', function() {
-      if (noClickCount < 5) { // Changez 5 à 6 pour permettre 6 clics
-        imageDisplay.src = imagePaths[noClickCount];
-      }
-      console.log('Button clicked');
-      if (navigator.vibrate) {
-        console.log('Vibrating');
-        navigator.vibrate(200);
-      } else {
-        console.log('Vibration API not supported');
-      }
-        if (noClickCount === 0) {
-          // Augmente la taille de la première image
-          imageDisplay.style.width = '400px'; // Ajustez selon la taille souhaitée
-          imageDisplay.style.height = 'auto'; // Conserve le ratio de l'image
+  if (noClickCount < 5) {
+    imageDisplay.src = imagePaths[noClickCount];
+    if (noClickCount === 0) {
+      // Augmente la taille de la première image
+      imageDisplay.style.width = '400px';
+      imageDisplay.style.height = 'auto';
     }
     noClickCount++;
-    buttonHeight += 35; // Increase height by 35px on each click
+    buttonHeight += 35;
     buttonWidth += 35;
-    fontSize += 25; // Increase font size by 25px on each click
-    yesButton.style.height = `${buttonHeight}px`; // Update button height
+    fontSize += 25;
+    yesButton.style.height = `${buttonHeight}px`;
     yesButton.style.width = `${buttonWidth}px`;
-    yesButton.style.fontSize = `${fontSize}px`; // Update font size
-    if (noClickCount < 6) {
-      noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ", "T'ES FIÈRE DE TOI????"][noClickCount];
-    } else {
+    yesButton.style.fontSize = `${fontSize}px`;
+    noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
+  } else {
     // Réinitialise tout à l'état initial
     noClickCount = 0;
     buttonHeight = 48;
@@ -123,11 +114,20 @@
     yesButton.style.width = `${buttonWidth}px`;
     yesButton.style.fontSize = `${fontSize}px`;
     noButton.textContent = "Non";
-    imageDisplay.src = "https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s;" // Affiche la première image
-    imageDisplay.style.width = '300px'; // Taille initiale
-    imageDisplay.style.height = 'auto'; // Conserve le ratio de l'image
+    imageDisplay.src = imagePaths[0];
+    imageDisplay.style.width = '300px';
+    imageDisplay.style.height = 'auto';
+  }
+
+  console.log('Button clicked');
+  if (navigator.vibrate) {
+    console.log('Vibrating');
+    navigator.vibrate(200);
+  } else {
+    console.log('Vibration API not supported');
   }
 });
+
   
     yesButton.addEventListener('click', () => {
       imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s'; // Change to image7.gif
