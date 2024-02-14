@@ -6,13 +6,25 @@
   <title>Valentines Day</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .gradient-background {
-      background-image: url('SBOB-BACK.svg');
-      background-size: cover;
-      background-position: center;
-      transform: scaleY(-1); /* Flips the background image vertically */
+  
+    .gradiant-background {
+  position: relative;
+  overflow: hidden; /* Ensure the pseudo-element doesn't overflow the container */
+}
 
-    }
+.gradiant-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('SBOB-BACK.svg');
+  background-size: cover;
+  background-position: center;
+  transform: scaleY(-1); /* Flips the background image vertically */
+  z-index: -1; /* Ensure the pseudo-element is behind the content */
+}
 
     .bounce2 {
       animation: bounce2 2s ease infinite;
