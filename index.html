@@ -133,10 +133,13 @@
       imageDisplay.style.display = 'none';
       const video = document.getElementById('surpriseVideo');
       video.style.display = 'block';
-      video.play();
+      //video.play();
       noButton.textContent = "NON"; // Change the text for the final state
+      noButton.style.position = 'static';
+      noClickCount=0;
       noButton.onclick = function() {
         window.location.href = 'tel:5147748144'; // Call the number
+        
       };
     }
   });
