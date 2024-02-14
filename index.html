@@ -68,70 +68,72 @@
     </div>
   </div>
 
-  <script type="module">
-    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
-    const yesButton = document.getElementById('yesButton');
-    const noButton = document.getElementById('noButton');
-    const imageDisplay = document.getElementById('imageDisplay');
-    const valentineQuestion = document.getElementById('valentineQuestion');
-    const responseButtons = document.getElementById('responseButtons');
+<script type="module">
+  import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+  const yesButton = document.getElementById('yesButton');
+  const noButton = document.getElementById('noButton');
+  const imageDisplay = document.getElementById('imageDisplay');
+  const valentineQuestion = document.getElementById('valentineQuestion');
+  const responseButtons = document.getElementById('responseButtons');
 
-    let noClickCount = 0;
-    let intervalId;
-    let intervalDuration = 1000; // Initial interval duration in milliseconds
-    const initialImage = imageDisplay.src; // Store the initial image URL
+  let noClickCount = 0;
+  let intervalId;
+  let intervalDuration = 1000; // Initial interval duration in milliseconds
+  const initialImage = imageDisplay.src; // Store the initial image URL
+  const navigationBarHeight = 60; // Estimated height of the browser's navigation bar
 
-    const imagePaths = [
-      "https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s",
-      "https://media.giphy.com/media/7lGTNWDKs6dDvJF6fZ/giphy.gif?cid=ecf05e47ubf0xeoj49pv1a2of0scilbsruvlxojk71m7robi&ep=v1_stickers_search&rid=giphy.gif&ct=s",
-      "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif",
-      "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif",
-      "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s",
-      "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif",
-    ];
+  const imagePaths = [
+    "https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s",
+    "https://media.giphy.com/media/7lGTNWDKs6dDvJF6fZ/giphy.gif?cid=ecf05e47ubf0xeoj49pv1a2of0scilbsruvlxojk71m7robi&ep=v1_stickers_search&rid=giphy.gif&ct=s",
+    "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif",
+    "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif",
+    "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s",
+    "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif",
+  ];
 
-    noButton.addEventListener('click', function() {
-      if (noClickCount < 5) {
-        imageDisplay.src = imagePaths[noClickCount];
-        noClickCount++;
-        noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
+  noButton.addEventListener('click', function() {
+    if (noClickCount < 5) {
+      imageDisplay.src = imagePaths[noClickCount];
+      noClickCount++;
+      noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
 
-        if (noClickCount >= 1) {
-          // Increase the speed of the button movement
-          intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration, but don't go below 100 ms
+      if (noClickCount >= 1) {
+        // Increase the speed of the button movement
+        intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration
 
-          // Restart the movement with the new speed
-          clearInterval(intervalId);
-          intervalId = setInterval(moveButton, intervalDuration);
-        }
-      } else {
-        // Reset everything to the initial state
+        // Restart the movement with the new speed
         clearInterval(intervalId);
-        noClickCount = 0;
-        intervalDuration = 1000;
-        noButton.style.position = 'static';
-        noButton.textContent = "Non";
-        imageDisplay.src = initialImage; // Reset to the initial image
+        intervalId = setInterval(moveButton, intervalDuration);
       }
-    });
-
-    function moveButton() {
-      const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
-      const maxX = parent.clientWidth - noButton.offsetWidth;
-      const maxY = parent.clientHeight - noButton.offsetHeight-100; // Adjust for browser navigation bar
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY)+100;
-      noButton.style.position = 'absolute';
-      noButton.style.left = `${randomX}px`;
-      noButton.style.top = `${randomY}px`;
+    } else {
+      // Reset everything to the initial state
+      clearInterval(intervalId);
+      noClickCount = 0;
+      intervalDuration = 1000;
+      noButton.style.position = 'static';
+      noButton.textContent = "Non";
+      imageDisplay.src = initialImage; // Reset to the initial image
     }
+  });
 
-    yesButton.addEventListener('click', () => {
-      imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
-      valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
-      responseButtons.style.display = 'none';
-      confetti();
-    });
-  </script>
+  function moveButton() {
+    const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
+    const maxX = parent.clientWidth - noButton.offsetWidth;
+    const maxY = parent.clientHeight - noButton.offsetHeight - navigationBarHeight; // Adjust for browser navigation bar
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    noButton.style.position = 'absolute';
+    noButton.style.left = `${randomX}px`;
+    noButton.style.top = `${randomY}px`;
+  }
+
+  yesButton.addEventListener('click', () => {
+    imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
+    valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
+    responseButtons.style.display = 'none';
+    confetti();
+  });
+</script>
+
 </body>
 </html>
