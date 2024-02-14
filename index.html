@@ -80,6 +80,9 @@
     let buttonHeight = 48; // Starting height in pixels
     let buttonWidth = 80;
     let fontSize = 20; // Starting font size in pixels
+    let intervalId;
+    let intervalDuration = 1000; // Durée initiale de l'intervalle en millisecondes
+
     const imagePaths = [
       "https://media.giphy.com/media/7lGTNWDKs6dDvJF6fZ/giphy.gif?cid=ecf05e47ubf0xeoj49pv1a2of0scilbsruvlxojk71m7robi&ep=v1_stickers_search&rid=giphy.gif&ct=s",
       "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif",
@@ -118,14 +121,24 @@
     imageDisplay.style.width = '300px';
     imageDisplay.style.height = 'auto';
   }
-      const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
-      const maxX = parent.clientWidth - noButton.offsetWidth;
-      const maxY = parent.clientHeight - noButton.offsetHeight;
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
-      noButton.style.position = 'absolute';
-      noButton.style.left = `${randomX}px`;
-      noButton.style.top = `${randomY}px`;
+      // Augmente la vitesse de déplacement du bouton "Non"
+      intervalDuration = Math.max(100, intervalDuration - 100); // Réduit la durée de l'intervalle, mais ne descend pas en dessous de 100 ms
+
+      // Arrête l'intervalle précédent si nécessaire
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+
+      // Démarre un nouvel intervalle pour déplacer le bouton "Non"
+      intervalId = setInterval(function() {
+        const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
+        const maxX = parent.clientWidth - noButton.offsetWidth;
+        const maxY = parent.clientHeight - noButton.offsetHeight;
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+        noButton.style.left = `${randomX}px`;
+        noButton.style.top = `${randomY}px`;
+      }, intervalDuration);
 
 });
 
