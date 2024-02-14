@@ -71,6 +71,10 @@
           NON
         </button>
       </div>
+      <video id="surpriseVideo" style="display: none;" width="80%" controls>
+        <source src="Vid-Saint-Val.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </div>
 
@@ -96,7 +100,7 @@
   ];
 
   noButton.addEventListener('click', function() {
-    noButton.textContent = ["Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount];
+    noButton.textContent = ["Oh t'as misclick, right?", "Impossible, 2 fois?!", "Essayes-tu de battres un record?!", "ON VA AVOIR DU"][noClickCount];
 
     if (noClickCount < 4) {
       imageDisplay.src = imagePaths[noClickCount];
@@ -115,6 +119,9 @@
       clearInterval(intervalId);
       noClickCount = 0;
       intervalDuration = 1000;
+      const video = document.getElementById('surpriseVideo');
+        video.style.display = 'block';
+        video.play();
       noButton.style.position = 'static';
       imageDisplay.src = initialImage; // Reset to the initial image
       noButton.textContent = "NON"; // Reset the button text
