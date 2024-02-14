@@ -100,6 +100,7 @@
   const imageDisplay = document.getElementById('imageDisplay');
   const valentineQuestion = document.getElementById('valentineQuestion');
   const responseButtons = document.getElementById('responseButtons');
+  const video = document.getElementById('surpriseVideo'); // Déplacez cette ligne ici pour une meilleure portée
 
   let noClickCount = 0;
   let intervalId;
@@ -108,10 +109,10 @@
   const initialImage = imageDisplay.src; // Store the initial image URL
 
   const imagePaths = [
-    "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif", // Image displayed on "Oh t'as misclick, right?"
-    "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif", // Image displayed on "Impossible, 2 fois?!"
-    "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s", // Image displayed on "Essayes-tu de battres un record?!"
-    "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif", // Image displayed on "ON VA AVOIR DU"
+    "https://media.giphy.com/media/VhnX7VJPgKODRYhWsf/giphy.gif",
+    "https://media.giphy.com/media/SXxqhf4gsTNYZdbS12/giphy.gif",
+    "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s",
+    "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif",
   ];
 
   noButton.addEventListener('click', function() {
@@ -135,7 +136,6 @@
 
       // Display the video
       imageDisplay.style.display = 'none';
-      const video = document.getElementById('surpriseVideo');
       video.style.display = 'block';
       //video.play();
       noButton.textContent = "NON"; // Change the text for the final state
@@ -143,11 +143,10 @@
       noButton.onclick = function() {
         window.location.href = 'tel:5147748144'; // Call the number
         // Set a timeout to reset the page after 10 seconds if the user stays on the page
-        setTimeout(resetPage, 10000);
+        timeoutId = setTimeout(resetPage, 10000);
       };
     }
   });
-
 
   function moveButton() {
     const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
@@ -165,8 +164,6 @@
       clearTimeout(timeoutId);
     }
     // Hide the video and reset to the initial image if the video is displayed
-    const video = document.getElementById('surpriseVideo');
-    
     if (video.style.display === 'block') {
       video.style.display = 'none';
       imageDisplay.style.display = 'block';
@@ -183,18 +180,18 @@
     }
   });
 
-function resetPage() {
-  // Reset the page to the initial state
-  noClickCount = 0;
-  intervalDuration = 1000;
-  noButton.style.position = 'static';
-  noButton.textContent = "NON";
-  video.style.display = 'none'
-  imageDisplay.style.display = 'block';
-  imageDisplay.src = initialImage;
-  valentineQuestion.style.display = 'block';
-  responseButtons.style.display = 'flex';
-}
+  function resetPage() {
+    // Reset the page to the initial state
+    noClickCount = 0;
+    intervalDuration = 1000;
+    noButton.style.position = 'static';
+    noButton.textContent = "NON";
+    video.style.display = 'none';
+    imageDisplay.style.display = 'block';
+    imageDisplay.src = initialImage;
+    valentineQuestion.style.display = 'block';
+    responseButtons.style.display = 'flex';
+  }
 </script>
 
 
