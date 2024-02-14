@@ -11,11 +11,11 @@
       background-size: cover;
       background-position: center;
     }
-  
+
     .bounce2 {
       animation: bounce2 2s ease infinite;
     }
-  
+
     @keyframes bounce2 {
       0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
@@ -27,27 +27,27 @@
         transform: translateY(-10px);
       }
     }
-  
-  #yesButton, #noButton {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Ombrage doux */
-    padding: 10px 20px; /* Ajustez la taille du padding pour agrandir les boutons */
-    font-size: 4vw; /* Taille de police relative à la largeur de l'écran */
-    font-weight: bold; /* Police en gras */
-    text-transform: uppercase; /* Texte en majuscules */
-  }
-  
+
+    #yesButton, #noButton {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      font-size: 4vw;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
     #valentineQuestion {
       color: white;
       text-align: center;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75); /* Ombrage doux pour le texte */
-      font-size: 5vw; /* Taille de police relative à la largeur de l'écran */
-      font-weight: bold; /* Police en gras */
-      font-style: italic; /* Style de police en italique */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+      font-size: 5vw;
+      font-weight: bold;
+      font-style: italic;
     }
-  
+
     #imageDisplay {
-      width: 80vw; /* Largeur de l'image relative à la largeur de l'écran */
-      height: 200vw; /* Conserve le ratio de l'image */
+      width: 80vw;
+      height: auto;
     }
   </style>
 </head>
@@ -75,13 +75,10 @@
     const imageDisplay = document.getElementById('imageDisplay');
     const valentineQuestion = document.getElementById('valentineQuestion');
     const responseButtons = document.getElementById('responseButtons');
-  
+
     let noClickCount = 0;
-    let buttonHeight = 48; // Starting height in pixels
-    let buttonWidth = 80;
-    let fontSize = 20; // Starting font size in pixels
     let intervalId;
-    let intervalDuration = 1000; // Durée initiale de l'intervalle en millisecondes
+    let intervalDuration = 1000; // Initial interval duration in milliseconds
 
     const imagePaths = [
       "https://media.giphy.com/media/7lGTNWDKs6dDvJF6fZ/giphy.gif?cid=ecf05e47ubf0xeoj49pv1a2of0scilbsruvlxojk71m7robi&ep=v1_stickers_search&rid=giphy.gif&ct=s",
@@ -90,56 +87,32 @@
       "https://media.giphy.com/media/ZBiH5OEZ44ar1fBaPK/giphy.gif?cid=ecf05e47uk3pnh98f3793qzxf6yk79i77koup888br9j62q1&ep=v1_stickers_search&rid=giphy.gif&ct=s",
       "https://media.giphy.com/media/h3oDE2n2F7DXPLzOrQ/giphy.gif",
     ];
-    
-  
-  
-    noButton.addEventListener('click', function() {
-      if (noClickCount >= 1) {
-        // Increase the speed of the button movement
-        intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration, but don't go below 100 ms
 
-        // Restart the movement with the new speed
-        clearInterval(intervalId);
-        intervalId = setInterval(moveButton, intervalDuration);
-      }
+    noButton.addEventListener('click', function() {
       if (noClickCount < 5) {
-    imageDisplay.src = imagePaths[noClickCount];
-    if (noClickCount === 0) {
-      // Augmente la taille de la première image
-      //imageDisplay.style.width = '400px';
-      //imageDisplay.style.height = 'auto';
-    }
-    noClickCount++;
-    //buttonHeight += 35;
-    //buttonWidth += 35;
-    //fontSize += 25;
-    //yesButton.style.height = `${buttonHeight}px`;
-    //yesButton.style.width = `${buttonWidth}px`;
-    //yesButton.style.fontSize = `${fontSize}px`;
-    noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
-  } else {
-    // Réinitialise tout à l'état initial
-    noClickCount = 0;
-    buttonHeight = 48;
-    buttonWidth = 80;
-    fontSize = 20;
-    yesButton.style.height = `${buttonHeight}px`;
-    yesButton.style.width = `${buttonWidth}px`;
-    yesButton.style.fontSize = `${fontSize}px`;
-    noButton.textContent = "Non";
-    imageDisplay.src = 'https://media.giphy.com/media/kcx7gd3QtF2QrjlS33/giphy.gif?cid=ecf05e47c2i8j690124rm72ukbf6gjo2ls6dojstbejxi9gp&ep=v1_stickers_search&rid=giphy.gif&ct=s';
-    imageDisplay.style.width = '300px';
-    imageDisplay.style.height = 'auto';
-  }
-      if (noClickCount === 5) {
+        imageDisplay.src = imagePaths[noClickCount];
+        noClickCount++;
+        noButton.textContent = ["Non", "Oh t'as misclick, right?", "Impossible, misclick 2 fois?!", "3 FOIS??? C'est rendu personnel là", "OK TU PEUX ARRÊTER LÀ"][noClickCount - 1];
+
+        if (noClickCount >= 2) {
+          // Increase the speed of the button movement
+          intervalDuration = Math.max(100, intervalDuration - 100); // Reduce the interval duration, but don't go below 100 ms
+
+          // Restart the movement with the new speed
+          clearInterval(intervalId);
+          intervalId = setInterval(moveButton, intervalDuration);
+        }
+      } else {
+        // Reset everything to the initial state
         clearInterval(intervalId);
         noClickCount = 0;
         intervalDuration = 1000;
         noButton.style.position = 'static';
+        noButton.textContent = "Non";
+        imageDisplay.src = imagePaths[0];
       }
-
-  
     });
+
     function moveButton() {
       const parent = document.querySelector('.flex.items-center.justify-center.h-screen');
       const maxX = parent.clientWidth - noButton.offsetWidth;
@@ -151,13 +124,13 @@
       noButton.style.top = `${randomY}px`;
     }
 
-  
     yesButton.addEventListener('click', () => {
-      imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s'; // Change to image7.gif
-      valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)"; // Change the question text
-      responseButtons.style.display = 'none'; // Hide both buttons
-      confetti(); // Trigger confetti animation
+      imageDisplay.src = 'https://media.giphy.com/media/ViHltU618A4stOVIB4/giphy.gif?cid=790b76112n8xhzwm9jsd9l4rvccj8jrqu1mspmh7zjg6ni6a&ep=v1_stickers_search&rid=giphy.gif&ct=s';
+      valentineQuestion.innerHTML = "SUSHI @ 7:45PM<br>(avec une petite surprise)";
+      responseButtons.style.display = 'none';
+      confetti();
     });
   </script>  
 </body>
 </html>
+
